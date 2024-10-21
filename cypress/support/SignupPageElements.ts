@@ -1,0 +1,43 @@
+export enum SignupPageElements {
+    FirstName = 'firstName',
+    LastName = 'lastName',
+    Email = 'email',
+    Phone = 'phone',
+    Password = 'password',
+    PasswordConfirm = 'passwordConfirm',
+    Province = 'province',
+    LeadDistributeConsentAgreement = 'leadDistributeConsentAgreement',
+    CreateYourAccount = 'createYourAccount',
+    CreateAccountPageLogin = 'createAccountPage_login',
+    ToggleLanguage = 'toggle-language',
+    InputLabelFirstName = 'input_label-firstName',
+    InputLabelLastName = 'input_label-lastName',
+    InputLabelEmail = 'input_label-email',
+    InputLabelPassword = 'input_label-password',
+    InputLabelPasswordConfirm = 'input_label-passwordConfirm',
+    InputLabelPhone = 'input_label-phone',
+    SelectLabelProvince = 'select_label-province',
+    FormWarnPasswordComplexity = 'formWarn_passwordComplexity',
+    FormSignupCreateYourAccount = 'form_signup_createYourAccount',
+    GetAQuoteShortPartnerAgreementAndEmailV3 = 'getAQuote_shortPartnerAgreementAndEmail_V3',
+    ReadOurPolicyV2 = 'readOurPolicy_V2',
+    FormSignupTitle = 'form_signup_title',
+    CreateAccountAgreement = 'createAccountAgreement',
+
+    // Form errors
+    FormErrorFirstName = 'form-error-firstName',
+    FormErrorLastName = 'form-error-lastName',
+    FormErrorEmail = 'form-error-email',
+    FormErrorPassword = 'form-error-password',
+    FormErrorPasswordConfirm = 'form-error-passwordConfirm',
+    FormErrorPhone = 'form-error-phone',
+
+    // Validation errors
+    ValidationErrorsTooLong = 'validation_errors_tooLong',
+    ValidationErrorsIsRequired = 'validation_errors_isRequired',
+    ValidationErrorsInvalidEmail = 'validation_errors_invalidEmail',
+    ValidationErrorsInvalidPassword = 'validation_errors_passwordsTooWeak',
+    ValidationErrorsPasswordsMustMatch = 'validation_errors_passwordsMustMatch',
+
+    ToastDuplicateActionTitle = 'toasts_duplicateAccount_title',
+}

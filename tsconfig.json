@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+      /* Projects */
+      "target": "es5",
+      "lib": ["dom", "es5"],
+      "module": "commonjs",
+      "types": ["cypress", "node", "jquery"],
+      "noEmit": true,
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
+      "strict": true
+    },
+    "include": [
+      "src/**/*.ts",          // Include source files
+      "cypress/**/*.ts",      // Include Cypress test files
+      "cypress.config.ts"     // Include Cypress configuration
+    ],
+    "exclude": [
+      "node_modules"
+    ]
+  }
+  

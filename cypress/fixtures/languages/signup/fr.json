@@ -1,0 +1,23 @@
+{
+    "title": "Créez un compte nesto",
+    "fields": {
+        "firstName": "Prénom",
+        "lastName": "Nom de famille",
+        "email": "Courriel",
+        "phone": "Numéro de cellulaire",
+        "password": "Mot de passe",
+        "passwordConfirm": "Confirmez votre mot de passe",
+        "province": "Province",
+        "provinceQuebec": "Québec"
+    },
+    "labels": {
+        "required": "Requis",
+        "invalidEmail": "Courriel invalide",
+        "invalidPassword": "Veuillez choisir un mot de passe plus sûr.",
+        "invalidPasswordConfirmation": "Vos mots de passe ne correspondent pas.",
+        "passwordComplexity": "Le mot de passe doit comporter entre 12 et 32 caractères et contenir au moins une lettre majuscule, une lettre minuscule et un chiffre.",
+        "agreement": "En cochant cette case, vous acceptez d’être contacté par les partenaires de nesto dans le but de vous proposer des produits financiers. Vous acceptez que nesto partage vos informations de demande hypothécaire avec ses partenaires, si nous ne sommes pas en mesure de vous fournir nos services. Vous pouvez vous désinscrire à tout moment.",
+        "policy": " Voir notre politique de confidentialité pour en savoir plus.",
+        "tooLong": "Trop de caractères"
+    }
+}

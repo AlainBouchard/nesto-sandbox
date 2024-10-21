@@ -1,0 +1,23 @@
+{
+    "title": "Create a nesto account",
+    "fields": {
+        "firstName": "First name",
+        "lastName": "Last name",
+        "email": "Email",
+        "phone": "Mobile phone number",
+        "password": "Password",
+        "passwordConfirm": "Confirm password",
+        "province": "Province",
+        "provinceQuebec": "Quebec"
+    },
+    "labels": {
+        "required": "Required",
+        "invalidEmail": "Invalid email address",
+        "invalidPassword": "Your password is too weak",
+        "invalidPasswordConfirmation": "Your passwords do not match",
+        "passwordComplexity": "Password must be between 12 and 32 characters and contain one uppercase letter, one lowercase letter and one number.",
+        "agreement": "By checking this box, you agree to be contacted by nesto’s partners for the purposes of offering you financial products. You agree to nesto sharing your mortgage information with its partners. You can opt-out at any time.",
+        "policy": "Read our Privacy Policy to learn more.",
+        "tooLong": "Too many characters"
+    }
+}
