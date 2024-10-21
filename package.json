@@ -1,0 +1,34 @@
+{
+  "name": "nesto-sandbox",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint '**/*.{js,ts,tsx}' --no-cache",
+    "lint:fix": "eslint '**/*.{js,ts,tsx}' --fix --no-cache",
+    "lint:cypress": "eslint 'cypress/**/*.{js,ts,tsx}' --no-cache",
+    "cypress:run:lang": "npx cypress run --env language=$LANG",
+    "cypress:run:en": "npx cypress run --env language=en",
+    "cypress:run:fr": "npx cypress run --env language=fr"
+  },
+  "keywords": [],
+  "author": "abouchard@live.ca",
+  "license": "ISC",
+  "description": "Having fun with Cypress 13 using Nesto QA website",
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "@faker-js/faker": "^9.0.3",
+    "@types/cypress": "^0.1.6",
+    "@types/jquery": "^3.5.31",
+    "@types/node": "^22.7.6",
+    "@typescript-eslint/eslint-plugin": "8.10.0",
+    "@typescript-eslint/parser": "8.10.0",
+    "cypress": "^13.15.0",
+    "eslint": "^9.13.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-cypress": "^4.0.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.11.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.3"
+  }
+}

@@ -1,0 +1,31 @@
+# Ignore node_modules (dependencies installed locally)
+node_modules
+
+# Ignore logs
+logs
+*.log
+npm-debug.log
+yarn-error.log
+
+# Ignore compiled files
+dist
+build
+
+# Cypress output files
+cypress/videos
+cypress/screenshots
+cypress/results
+
+# Ignore environment files
+.env
+
+# Ignore Docker-related files (optional)
+.dockerignore
+Dockerfile
+
+# Ignore editor or system-specific files
+.vscode/
+.idea/
+*.swp
+.DS_Store
+.trash/
