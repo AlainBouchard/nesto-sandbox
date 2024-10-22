@@ -19,7 +19,7 @@ Instructions:
 1. Make sure to have Docker installed on your computer: [Docker Get Started](https://www.docker.com/get-started/)
 2. From CLI: 
     ```sh
-    % docker build -t nesto-sandbox:latest.
+    % docker build -t nesto-sandbox:latest .
     ````
 3. Verify the docker image availability:
     ```sh
@@ -41,7 +41,7 @@ Instructions:
 
 This method is better in order to modify the test suite.
 
-The `node` and `npm` versions used for this project is:
+The `node` and `npm` versions used for this project are:
 
 ```sh
 % node --version
@@ -74,7 +74,7 @@ Instructions:
 
 4. Wait for the test to run and complete.
 
-## Test Plan
+## What? (Test Plan)
 
 This is a limited subset of tests and use cases and more tests could be added.  For example, this sandbox does assume that the Login Page to SignUp page flow was tested earlier in the test strategy.
 
@@ -96,11 +96,10 @@ Google Doc)
 
 | ID   | What                                                                 | How                                                                                                                                                                                                                         |
 |------|----------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ID-01 | Validate that all required `data-test-id` elements exist on the page | Verify that the following elements are present: `firstName`, `lastName`, `email`, `phone`, `passwordConfirm`, `select_label-province`, `leadDistributeConsentAgreement`, `createYourAccount`, etc., using `cy.getDataTestId()`. |
-| ID-02 | Validate that the page title is displayed and matches the expected text | Use the fixture to load the page title and assert that the element `form_signup_title` is visible and has the correct text, based on the language.                                                                            |
-| ID-03 | Validate that the UI language changes when language is toggled       | Toggle the language between English and French using `cy.nestoToggleLanguage()`, then assert that the title matches the expected text ("Create a nesto account" for English, "Créez un compte nesto" for French).             |
-| ID-04 | Validate that the form data remains after switching language         | Input "Jon" in the `firstName` field, toggle the language from French to English using `cy.nestoToggleLanguage()`, and assert that the input value remains the same after the language switch.                                 |
-
+| ID-11 | Validate that all required `data-test-id` elements exist on the page | Verify that the following elements are present: `firstName`, `lastName`, `email`, `phone`, `passwordConfirm`, `select_label-province`, `leadDistributeConsentAgreement`, `createYourAccount`, etc., using `cy.getDataTestId()`. |
+| ID-12 | Validate that the page title is displayed and matches the expected text | Use the fixture to load the page title and assert that the element `form_signup_title` is visible and has the correct text, based on the language.                                                                            |
+| ID-13 | Validate that the UI language changes when language is toggled       | Toggle the language between English and French using `cy.nestoToggleLanguage()`, then assert that the title matches the expected text ("Create a nesto account" for English, "Créez un compte nesto" for French).             |
+| ID-14 | Validate that the form data remains after switching language         | Input "Jon" in the `firstName` field, toggle the language from French to English using `cy.nestoToggleLanguage()`, and assert that the input value remains the same after the language switch.                                 |
 
 ### SignUp Page - Fields Validation
 
@@ -140,3 +139,7 @@ The following are issues from this test suite. Some may be expected by PO (or PM
 | ISSUE-002 | ID-21.3 | Special characters are accepted in the first name field | 1. Go to the signup page <br> 2. Toggle the language to French <br> 3. Enter a first name with special characters (e.g., `@John`, `J#ohn`, `Joh%n`) <br> 4. Submit the form | The system should not allow special characters in the first name and show an error message | Special characters are allowed in the first name | Low |
 | ISSUE-003 | ID-22.3 | Special characters are accepted in the last name field | 1. Go to the signup page <br> 2. Toggle the language to French <br> 3. Enter a last name with special characters (e.g., `@Snow`, `S#now`, `Sn%ow`) <br> 4. Submit the form | The system should not allow special characters in the last name and show an error message | Special characters are allowed in the last name | Low |
 | ISSUE-004 | ID-24.1 | Partial phone numbers are accepted by the UI | 1. Go to the signup page <br> 2. Toggle the language to French <br> 3. Enter partial or invalid phone numbers (e.g., `5`, `555-555-555`, `ABC-DEF-GHIJ`, `555-555-555A`) <br> 4. Submit the form | The system should validate and reject incomplete phone numbers | Partial phone numbers are accepted by the UI, and the form proceeds without error | High |
+
+## Then?
+
+Many tests could be added, like Security Tests.  I've added a `Cypress Custom Command` that is using API instead of UI.  The plan was to add Security Tests (e.g., `SQL injection`) using the API but I've thought that could be breaking the QA environment and it wasn't part of the scope of this sandbox project.  Since Cypress Custom Command is already there the it would be quite easy and quick to add.
