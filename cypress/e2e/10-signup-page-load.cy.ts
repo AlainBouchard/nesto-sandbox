@@ -16,7 +16,7 @@ describe('SignUp Page -> Page load and layout', () => {
         cy.nestoToggleLanguage();
     });
   
-    it('ID-01: Should validate that all required data-test-id elements exist on the page', () => {
+    it('ID-11: Should validate that all required data-test-id elements exist on the page', () => {
         // Arrange
         const testIds: string[] = [
             SignupPageElements.FirstName,
@@ -50,7 +50,7 @@ describe('SignUp Page -> Page load and layout', () => {
         });
     });
 
-    it('ID-02: Should validate that the page title is displayed and matches the expected text', () => {
+    it('ID-12: Should validate that the page title is displayed and matches the expected text', () => {
         // Arrange
         const title: string = text['title'];
         
@@ -62,7 +62,7 @@ describe('SignUp Page -> Page load and layout', () => {
           .and('have.text', title);
     });
     
-    it('ID-03: Should validate that the UI language changes when language is toggled', () => {        
+    it('ID-13: Should validate that the UI language changes when language is toggled', () => {        
         // Arrange
         type TestData = {language: string, expect: string};
         const testData: TestData[] = [
@@ -82,8 +82,13 @@ describe('SignUp Page -> Page load and layout', () => {
         });
     });
 
-    // Failing, to validate with PO
-    it('ID-04: Should validate that the form data stay after switching language', () => {        
+    /**
+     * Failing: to validate with PO.
+     * Expectations: The user information should stay in the Fields when toggling languages.
+     * Current behaviors: The user information is deleted when toggling languages, which can be irritating for a customer.
+     * Priority: low
+     * */ 
+    it('ID-14: Should validate that the form data stay after switching language', () => {        
         // Arrange
         const firstName: string = 'Jon';
         

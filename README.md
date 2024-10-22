@@ -1,67 +1,142 @@
 # nesto-sandbox
 
-This is a sandbox playing with Nesto's QA environment.
+## What?
+
+This is a sandbox to play with Nesto's QA environment and Cypress.  It is using Cypress, Typescript, ESLint, Faker, etc.
+
+The Nesto QA URL is: https://app.qa.nesto.ca/
+
+## How?
+
+Clone the project from this GitHub link: [nesto-sandbox](https://github.com/AlainBouchard/nesto-sandbox)
+
+### With Docker Image
+
+It's easy to use in order to avoid Node.JS local configuration, and in order to run as it would run in CI pipeline.
+
+Instructions:
+
+1. Make sure to have Docker installed on your computer: [Docker Get Started](https://www.docker.com/get-started/)
+2. From CLI: 
+    ```sh
+    % docker build -t nesto-sandbox:latest.
+    ````
+3. Verify the docker image availability:
+    ```sh
+    % docker images
+    ```
+
+    ```text
+    REPOSITORY      TAG       IMAGE ID       CREATED        SIZE
+    nesto-sandbox   latest    3184648fa500   11 hours ago   1.91GB
+    ```
+4. Run the Cypress Tests using the docker image:
+    ```sh
+    % docker run -e LANG=en -it nesto-sandbox:latest
+    ```
+    Where LANG is the environment variable for the language, use either `fr` or `en` values.
+5. Wait for the test to run and complete.
+
+### With Node.js
+
+This method is better in order to modify the test suite.
+
+The `node` and `npm` versions used for this project is:
+
+```sh
+% node --version
+v22.9.0
+
+% npm --version
+10.8.3
+```
+
+Instructions:
+
+1. Install Node.js by following the instructions: [node.js installation](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs)
+2. Install the dependencies:
+    ```sh
+    % npm ci
+    ```
+    Using `npm ci` instead of `npm install` will make the tests more stable since it will use the versions from the `package-lock.json` file.  It is better for reproducibility.
+
+3. Run the tests:
+
+    Run the tests with the English UI (default) language:
+    ```sh
+    % npm run cypress:run:en
+    ```
+
+    Or with the French UI language:
+    ```sh
+    % npm run cypress:run:en
+    ```
+
+4. Wait for the test to run and complete.
 
 ## Test Plan
 
-### 1. **Login Page Load**
+This is a limited subset of tests and use cases and more tests could be added.  For example, this sandbox does assume that the Login Page to SignUp page flow was tested earlier in the test strategy.
 
-| **ID** | **What to Test**                  | **How to Test**                                                                                                                                             |
-|--------|-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1      | Page Load                         | Verify that the login page loads successfully by visiting the login URL. Ensure all elements (email, password, options, login button) are displayed correctly. |
+Criteria for this project:
 
-### 2. **Email Field Tests**
+1. Automate positive and negative test cases that you could think of for
+the Signup page
+2. Add coverage for fields, labels
+3. Validate that the API for the account creation returns 201 status
+code and validate that the body response contains the entered
+information in the form
+4. Handle ability to run your test suite against selected language from
+the UI
+5. Use typescript in cypress if you have experience (is a bonus)
+6. If you discover any bugs, please create a report (attach .txt file or
+Google Doc)
 
-| **ID** | **What to Test**                  | **How to Test**                                                                                                                                             |
-|--------|-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 2      | Email Field - Empty               | Try submitting the login form with the email field left empty. Verify that an appropriate error message is shown (e.g., "Email is required").                |
-| *3      | Email Field - Valid Email         | Enter a valid email (e.g., "test@example.com"). Verify that no error is displayed, and form submission proceeds correctly (if password is also valid).        |
-| 4      | Email Field - Invalid Email Format| Enter invalid email formats (e.g., "test@", "test.com", "test@com"). Verify that an appropriate error message is displayed (e.g., "Invalid email address").   |
-| 5      | Email Field - Long Email          | Enter an extremely long email address (e.g., 255+ characters). Verify that the system handles it appropriately and the correct error message is displayed.    |
-| 6      | Email Field - Special Characters  | Enter email addresses with special characters (e.g., "user+test@example.com", "test_user@example.com"). Verify that these formats are accepted.              |
+### SignUp Page - Load
 
-### 3. **Password Field Tests**
+| ID   | What                                                                 | How                                                                                                                                                                                                                         |
+|------|----------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ID-01 | Validate that all required `data-test-id` elements exist on the page | Verify that the following elements are present: `firstName`, `lastName`, `email`, `phone`, `passwordConfirm`, `select_label-province`, `leadDistributeConsentAgreement`, `createYourAccount`, etc., using `cy.getDataTestId()`. |
+| ID-02 | Validate that the page title is displayed and matches the expected text | Use the fixture to load the page title and assert that the element `form_signup_title` is visible and has the correct text, based on the language.                                                                            |
+| ID-03 | Validate that the UI language changes when language is toggled       | Toggle the language between English and French using `cy.nestoToggleLanguage()`, then assert that the title matches the expected text ("Create a nesto account" for English, "Créez un compte nesto" for French).             |
+| ID-04 | Validate that the form data remains after switching language         | Input "Jon" in the `firstName` field, toggle the language from French to English using `cy.nestoToggleLanguage()`, and assert that the input value remains the same after the language switch.                                 |
 
-| **ID** | **What to Test**                  | **How to Test**                                                                                                                                             |
-|--------|-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 7      | Password Field - Empty            | Try submitting the login form with the password field left empty. Verify that an appropriate error message is shown (e.g., "Password is required").          |
-| *8      | Password Field - Valid Password   | Enter a valid password (e.g., meeting length requirements). Verify that the login form can be successfully submitted (if the email is also valid).           |
-| 9      | Password Field - Invalid (Too Short)| Enter a password that is too short (e.g., less than the minimum length). Verify that an appropriate error message is shown (e.g., "Password is too short").  |
-| 10     | Password Field - Special Characters| Enter a password with special characters (e.g., "@!#%"). Verify that these are accepted as part of the password.                                            |
-| 11     | Password Field - Long Password    | Enter an extremely long password (e.g., 255+ characters). Verify that the system handles it appropriately and the correct error message is displayed.        |
 
-### 4. **"Forgot Your Password?" Option**
+### SignUp Page - Fields Validation
 
-| **ID** | **What to Test**                  | **How to Test**                                                                                                                                             |
-|--------|-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 12     | "Forgot Your Password?" - Click   | Click on the "Forgot your password?" link. Verify that it redirects to the password reset page and the reset form is displayed.                              |
-| 13     | "Forgot Your Password?" - Valid Email | Enter a valid email address and submit the password reset form. Verify that an email is sent to the user with instructions to reset the password.            |
-| 14     | "Forgot Your Password?" - Invalid Email | Enter an invalid or non-existent email address on the password reset form. Verify that an appropriate error message is shown (e.g., "Email not found").      |
-| 15     | "Forgot Your Password?" - Empty Email  | Try submitting the password reset form with the email field left empty. Verify that an error message is displayed (e.g., "Email is required").               |
+| ID        | What                                                                                  | How                                                                                                                                                    |
+|-----------|---------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ID-21.1   | Validate that the first name field accepts valid input                                | Verify no validation errors for the `firstName` field when a valid name (e.g., 'Jon') is entered.                                                      |
+| ID-21.2   | Validate first name field with valid and invalid lengths                              | Test the `firstName` field with 63, 64 (valid), and 65 (invalid) characters, and assert validation for character limit (`tooLong` error).               |
+| ID-21.3   | Validate first name field with special characters                                     | Test the `firstName` field with special characters (e.g., '@John', 'J#ohn') and check for validation error (`Invalid first name`).                      |
+| ID-22.1   | Validate that the last name field accepts valid input                                 | Verify no validation errors for the `lastName` field when a valid name (e.g., 'Snow') is entered.                                                      |
+| ID-22.2   | Validate last name field with valid and invalid lengths                               | Test the `lastName` field with 63, 64 (valid), and 65 (invalid) characters, and assert validation for character limit (`tooLong` error).                |
+| ID-22.3   | Validate last name field with special characters                                      | Test the `lastName` field with special characters (e.g., '@Snow', 'S#now') and check for validation error (`Invalid last name`).                        |
+| ID-23.1   | Validate email field with multiple invalid email formats                              | Test the `email` field with invalid formats (e.g., 'test@', 'test.com') and assert validation error (`Invalid email`).                                  |
+| ID-23.2   | Validate email field with valid email                                                 | Test the `email` field with a valid email (e.g., 'jon.snow@test.com') and ensure no validation errors.                                                  |
+| ID-23.3   | Validate email field with edge cases for character length                             | Test the `email` field with 128 characters (valid) and 129 characters (invalid), and assert no error for 128 chars but show a `tooLong` error for 129.  |
+| ID-24.1   | Validate phone field with multiple invalid phone number formats                       | Test the `phone` field with invalid phone numbers (e.g., '555-555-555', 'ABC-DEF-GHIJ') and assert validation error (`Invalid phone`).                  |
+| ID-24.2   | Validate phone field with valid phone number                                          | Test the `phone` field with a valid phone number (e.g., '514-1234567') and ensure no validation errors.                                                 |
+| ID-25.1   | Validate password field with invalid passwords                                        | Test the `password` field with invalid passwords (e.g., 'Short1Short', 'alllowercase12') and assert validation error (`Invalid password`).              |
+| ID-25.2   | Validate password field with valid passwords                                          | Test the `password` field with valid passwords (e.g., 'ValidPass123') and ensure no validation errors.                                                  |
+| ID-26     | Validate password confirmation field with mismatched passwords                       | Test the `passwordConfirm` field with mismatched passwords and assert validation error (`Passwords must match`).                                         |
+| ID-27     | Validate the province field with valid inputs                                         | Test the `province` field with valid provinces (e.g., 'Ontario', 'Quebec') and ensure the correct value is selected.                                    |
+| ID-28     | Validate the `leadDistributeConsentAgreement` checkbox can be checked/unchecked       | Check and uncheck the `leadDistributeConsentAgreement` checkbox and verify its checked/unchecked state.                                                 |
 
-### 5. **Login Button Tests**
+### SignUp Page - Form Submission
 
-| **ID** | **What to Test**                  | **How to Test**                                                                                                                                             |
-|--------|-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 16     | Login Button - Valid Credentials  | Enter a valid email and password, and click the login button. Verify that the user is successfully logged in and redirected to the appropriate page.         |
-| 17     | Login Button - Invalid Email      | Enter an invalid email (e.g., incorrect format or non-registered) and a valid password, then click the login button. Verify that an error message is shown.  |
-| 18     | Login Button - Invalid Password   | Enter a valid email and an incorrect password, then click the login button. Verify that an error message is shown (e.g., "Invalid email or password").       |
-| 19     | Login Button - Both Fields Invalid| Enter an invalid email and incorrect password, then click the login button. Verify that an error message is shown (e.g., "Invalid email or password").       |
-| 20     | Login Button - Empty Fields       | Try clicking the login button with both the email and password fields left empty. Verify that appropriate error messages are shown for both fields.          |
-| 21     | Login Button - Special Characters in Fields | Enter special characters in both email and password fields. Verify that the system handles special characters appropriately, rejecting invalid formats.      |
+| ID        | What                                                                                  | How                                                                                                                                                         |
+|-----------|---------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ID-31     | Fill the form with valid values and submit                                            | Intercept the API call to `/api/accounts`. Fill the form with valid values, submit it, and verify the response (status code 201 and correct account data).   |
+| ID-32     | Submit the form for an existing user and expect a conflict                            | Intercept the API call to `/api/accounts`. Fill the form with data for an existing user, submit it, and verify a conflict response (status code 409).        |
 
-### 6. **"Don't Have an Account?" Option**
+## Issues Report
 
-| **ID** | **What to Test**                  | **How to Test**                                                                                                                                             |
-|--------|-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 22     | "Don't Have an Account?" - Click  | Click on the "Don’t have an account?" link. Verify that it redirects to the account creation/registration page.                                              |
+The following are issues from this test suite. Some may be expected by PO (or PM).  It should be discussed within the team so that either the feature of the test can be fixed and the issue closed. Every organization will have their own best practices and guidelines.
 
-### 7. **Session and Security Tests**
-
-| **ID** | **What to Test**                  | **How to Test**                                                                                                                                             |
-|--------|-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 23     | Login - Session Management        | After logging in successfully, verify that a session or token is created and is valid by checking the browser’s local storage or cookies.                    |
-| 24     | Login - Failed Attempts Lockout   | Enter invalid credentials multiple times (e.g., 5 consecutive times). Verify that the account gets locked after a certain number of failed attempts.         |
-| 25     | Login - Cross-Site Scripting (XSS)| Try injecting scripts into the email or password fields. Verify that the system properly escapes and rejects malicious scripts.                              |
-
----
+| Issue ID | Test Case ID | Summary | Steps to Reproduce | Expected Behavior | Actual Behavior | Priority |
+|----------|--------------|---------|--------------------|-------------------|-----------------|----------|
+| ISSUE-001 | ID-14 | Form data is cleared when switching languages | 1. Go to the signup page <br> 2. Toggle the language to French <br> 3. Enter a first name <br> 4. Toggle the language back to English | The form data should persist after switching languages | The form data is deleted when toggling languages | Low |
+| ISSUE-002 | ID-21.3 | Special characters are accepted in the first name field | 1. Go to the signup page <br> 2. Toggle the language to French <br> 3. Enter a first name with special characters (e.g., `@John`, `J#ohn`, `Joh%n`) <br> 4. Submit the form | The system should not allow special characters in the first name and show an error message | Special characters are allowed in the first name | Low |
+| ISSUE-003 | ID-22.3 | Special characters are accepted in the last name field | 1. Go to the signup page <br> 2. Toggle the language to French <br> 3. Enter a last name with special characters (e.g., `@Snow`, `S#now`, `Sn%ow`) <br> 4. Submit the form | The system should not allow special characters in the last name and show an error message | Special characters are allowed in the last name | Low |
+| ISSUE-004 | ID-24.1 | Partial phone numbers are accepted by the UI | 1. Go to the signup page <br> 2. Toggle the language to French <br> 3. Enter partial or invalid phone numbers (e.g., `5`, `555-555-555`, `ABC-DEF-GHIJ`, `555-555-555A`) <br> 4. Submit the form | The system should validate and reject incomplete phone numbers | Partial phone numbers are accepted by the UI, and the form proceeds without error | High |

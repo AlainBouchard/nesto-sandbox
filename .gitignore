@@ -25,3 +25,5 @@ cypress/results
 *.swp
 .DS_Store
 .trash/
+tmpBstackPackages/
+browserstack.json
