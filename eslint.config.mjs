@@ -7,32 +7,29 @@ import cypressPlugin from 'eslint-plugin-cypress';  // Import Cypress plugin
 export default [
   // Apply to general JavaScript and TypeScript files
   {
-    files: ['**/*.{js,mjs,cjs,ts,tsx}'],
-    ignores: ['.trash/**/*'],  // Exclude .trash folder
+    files: ['**/*.{js,mjs,cjs,ts,tsx}'],  // Apply to all JS and TS files
+    ignores: ['.trash/**'],
     languageOptions: {
       parser: tsParser,  // Use TypeScript parser for TS files
       globals: {
         ...globals.browser,  // Include browser-specific global variables
         ...globals.node,     // Include Node.js globals
         JQuery: 'readonly',  // Add JQuery global for Cypress files
-        expect: 'readonly',  // Add expect as a global for tests
       },
     },
     plugins: {
-      '@typescript-eslint': tseslint,  // Ensure TypeScript ESLint plugin is used
+      '@typescript-eslint': tseslint,
     },
     rules: {
-      'quotes': ['error', 'single'],
-      'semi': ['error', 'always'],
-      '@typescript-eslint/no-unused-vars': 'error',
-      '@typescript-eslint/ban-ts-comment': 'warn',  // Reference this rule correctly
+      'quotes': ['error', 'single'],  // Enforce single quotes
+      'semi': ['error', 'always'],    // Enforce semicolons
+      '@typescript-eslint/no-unused-vars': 'error',  // Disallow unused variables
     },
   },
-  
+
   // Apply specifically to Cypress test files
   {
-    files: ['**/*.cy.{js,ts,tsx}', 'cypress/**/*.{js,ts,tsx}'],
-    ignores: ['.trash/**/*'],
+    files: ['**/*.cy.{js,ts,tsx}', 'cypress/**/*.{js,ts,tsx}'],  // Target Cypress test files
     languageOptions: {
       parser: tsParser,  // Use TypeScript parser for Cypress files
       globals: {
@@ -42,7 +39,7 @@ export default [
         ...globals.cypress,  // Include Cypress globals (cy, Cypress, etc.)
         ...globals.mocha,  // Include Mocha globals (describe, it, beforeEach, etc.)
         JQuery: 'readonly',  // Add JQuery global for Cypress files
-        expect: 'readonly',  // Add expect as a global for Cypress tests
+        expect: 'readonly',
       },
     },
     plugins: {
@@ -50,20 +47,16 @@ export default [
       'cypress': cypressPlugin,  // Enable Cypress plugin
     },
     rules: {
-      'quotes': ['error', 'single'],
-      'semi': ['error', 'always'],
-      '@typescript-eslint/no-unused-vars': 'error',
-      'cypress/no-unnecessary-waiting': 'error',
-      'cypress/assertion-before-screenshot': 'warn',
-      'cypress/unsafe-to-chain-command': 'off',
+      'quotes': ['error', 'single'],  // Enforce single quotes
+      'semi': ['error', 'always'],    // Enforce semicolons
+      '@typescript-eslint/no-unused-vars': 'error',  // Disallow unused variables
+      'cypress/no-unnecessary-waiting': 'error',  // Enforce Cypress rule
+      'cypress/assertion-before-screenshot': 'warn',  // Enforce Cypress rule
     },
   },
 
-  // Apply recommended JS rules
-  pluginJs.configs.recommended,
-
-  // Apply recommended TypeScript rules
+  pluginJs.configs.recommended,  // Recommended JavaScript rules
   {
-    rules: tseslint.configs.recommended.rules,
+    rules: tseslint.configs.recommended.rules,  // Include recommended TypeScript rules
   },
 ];

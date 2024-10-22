@@ -6,13 +6,8 @@ describe('SignUp Page -> Fields validation', () => {
     const language: string = Cypress.env('language') || 'en';
 
     before(() => {
-        // cy.fixture(`languages/signup/${language}`).then((loadedText) => {
-        //     text = loadedText;
-        // });
         cy.fixture(`languages/signup/${language}`).then((loadedText) => {
-            cy.wrap(loadedText).then((resolvedText) => {
-                text = resolvedText as Record<string, Record<string, string>>;
-            });
+            text = loadedText;
         });
     });
     

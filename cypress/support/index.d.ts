@@ -14,16 +14,6 @@ declare namespace Cypress {
         getDataTestId(id: string, shouldAssertion?: string): Chainable<JQuery<HTMLElement>>;
 
         /**
-         * Custom command to visit the Login Page and handle the cookies modal.
-         */
-        nestoGoToLoginPage(): Chainable<void>;
-
-        /**
-         * Custom command to visit the Forgotten Password page and handle the cookies modal.
-         */
-        nestoGoToForgottenPasswordPage(): Chainable<void>;
-
-        /**
          * Custom command to visit the SignUp page and handle the cookies modal.
          */
         nestoGoToSignupPage(): Chainable<void>;
@@ -38,6 +28,6 @@ declare namespace Cypress {
          * Toggle UI language.
          * @param language the UI language to use for the test, can be "en", "fr" or null, null will obtain language from Env.
          */
-        nestoToggleLanguage(language?: string);
+        nestoToggleLanguage(language?: string): Chainable<void>;
     }
 }

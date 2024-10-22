@@ -7,9 +7,7 @@ describe('SignUp Page -> Page load and layout', () => {
 
     before(() => {
         cy.fixture(`languages/signup/${language}`).then((loadedText) => {
-            cy.wrap(loadedText).then((resolvedText) => {
-                text = resolvedText as Record<string, string>;
-            });
+            text = loadedText as Record<string, string>;
         });
     });
     

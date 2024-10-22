@@ -19,10 +19,6 @@ cypress/results
 # Ignore environment files
 .env
 
-# Ignore Docker-related files (optional)
-.dockerignore
-Dockerfile
-
 # Ignore editor or system-specific files
 .vscode/
 .idea/

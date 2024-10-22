@@ -1,0 +1,31 @@
+# Ignore node_modules (dependencies should be installed inside Docker)
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Ignore logs
+logs
+*.log
+*.log.*
+
+# Ignore temporary files
+*.tmp
+*.swp
+*.swo
+
+# Ignore Cypress videos, screenshots, and results
+cypress/videos
+cypress/screenshots
+cypress/results
+
+# Ignore git-related files
+.git
+.gitignore
+
+# Ignore Docker-specific files
+.dockerignore
+Dockerfile
+
+# Ignore local environment files
+.env
+.trash
