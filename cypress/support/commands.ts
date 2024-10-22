@@ -1,18 +1,5 @@
 /// <reference types="cypress" />
-
-import { createUserFromApi, handleCookiesBanner } from './utils.ts';
-
-Cypress.Commands.add('nestoGoToLoginPage', () => {
-    cy.visit('/login').then(() =>
-        handleCookiesBanner()
-    );
-});
-
-Cypress.Commands.add('nestoGoToForgottenPasswordPage', () => {
-    cy.visit('/forgot').then(() =>
-        handleCookiesBanner()
-    );
-});
+import { createUserFromApi, handleCookiesBanner } from './utils';
 
 Cypress.Commands.add('nestoGoToSignupPage', () => {
     cy.visit('/signup').then(() =>
