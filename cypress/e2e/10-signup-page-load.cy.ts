@@ -100,10 +100,10 @@ describe('SignUp Page -> Page load and layout', () => {
 
         // Assert
         cy.getDataTestId(SignupPageElements.FirstName)
-        .invoke('val')
-        .then((inputValue) => {
-            expect(inputValue).to.equal(firstName);
-        });
+            .invoke('val')
+            .then((inputValue) => {
+                expect(inputValue).to.equal(firstName);
+            });
     });
 });
     
