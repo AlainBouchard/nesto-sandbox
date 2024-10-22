@@ -40,7 +40,6 @@ describe('SignUp Page -> From submission', () => {
         cy.nestoToggleLanguage();
     });
 
-
     before(() => {
         formData = {
             firstName: 'Jon',
