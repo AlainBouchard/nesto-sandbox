@@ -53,7 +53,7 @@ describe('SignUp Page -> From submission', () => {
         };    
     });
 
-    it('ID-30: Should fill the form with valid values and submit', () => {
+    it('ID-31: Should fill the form with valid values and submit', () => {
         // Arrange
         cy.intercept('POST', '/api/accounts').as('createAccount');
     
@@ -107,7 +107,7 @@ describe('SignUp Page -> From submission', () => {
         });    
     });    
 
-    it('ID-31: Should fill the form with existing user and submit then expect a conflict', () => {
+    it('ID-32: Should fill the form with existing user and submit then expect a conflict', () => {
         // Arrange
         cy.intercept('POST', '/api/accounts').as('createAccount');
     

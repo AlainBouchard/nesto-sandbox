@@ -17,7 +17,7 @@ describe('SignUp Page -> Fields validation', () => {
         cy.getDataTestId('createYourAccount').click();
     });
   
-    it('ID-04.1: Should input a valid first name and verify no validation errors are displayed', () => {
+    it('ID-21.1: Should input a valid first name and verify no validation errors are displayed', () => {
         // Arrange
         const firstName: string = 'Jon';
         const inputLabelFirstName: string = text['fields']['firstName'];
@@ -39,7 +39,7 @@ describe('SignUp Page -> Fields validation', () => {
         cy.getDataTestId(SignupPageElements.FormErrorFirstName, 'not.exist');
     });
 
-    it('ID-04.2: Should input valid and invalid first name lengths and verify validation errors', () => {
+    it('ID-21.2: Should input valid and invalid first name lengths and verify validation errors', () => {
         // Arrange
         const tooLongMessage: string = text['labels']['tooLong'];
         const testCases = [
@@ -64,8 +64,14 @@ describe('SignUp Page -> Fields validation', () => {
         });
     });
 
-    // Failing - to validate with PO/PM what should be the behaviour.
-    it('ID-04.3: Should validate that special characters in the first name', () => {
+    /**
+     * Failing: to validate with PO.
+     * Expectations: No special characters (e.g., !@#$...) should be accepted for the first name
+     *   and UI should give an error to the customer.
+     * Current behaviors: Special characters can be added to the first name.
+     * Priority: low
+     * */ 
+    it('ID-21.3: Should validate that special characters in the first name', () => {
         // Arrange
         const specialCharacterNames = ['@John', 'J#ohn', 'Joh%n'];
         const invalidFirstNameErrorMessage = 'Invalid first name';
@@ -83,7 +89,7 @@ describe('SignUp Page -> Fields validation', () => {
         });
     });    
 
-    it('ID-05.1: Should input a valid last name and verify no validation errors are displayed', () => {
+    it('ID-22.1: Should input a valid last name and verify no validation errors are displayed', () => {
         // Arrange
         const inputLabelLastName: string = text['fields']['lastName']; 
         const formErrorLastName: string = text['labels']['required'];
@@ -105,7 +111,7 @@ describe('SignUp Page -> Fields validation', () => {
         cy.getDataTestId(SignupPageElements.FormErrorLastName, 'not.exist');
     });
 
-    it('ID-05.2: Should input valid and invalid last name lengths and verify validation errors', () => {
+    it('ID-22.2: Should input valid and invalid last name lengths and verify validation errors', () => {
         // Arrange
         const tooLongMessage: string = text['labels']['tooLong'];
         const testCases = [
@@ -130,8 +136,14 @@ describe('SignUp Page -> Fields validation', () => {
         });
     });
 
-    // Failing - to validate with PO/PM what should be the behaviour.
-    it('ID-05.3: Should validate that special characters in the last name', () => {
+    /**
+     * Failing: to validate with PO.
+     * Expectations: No special characters (e.g., !@#$...) should be accepted for the last name
+     *   and UI should give an error to the customer.
+     * Current behaviors: Special characters can be added to the last name.
+     * Priority: low
+     * */ 
+    it('ID-22.3: Should validate that special characters in the last name', () => {
         // Arrange
         const specialCharacterNames = ['@Snow', 'S#now', 'Sn%ow'];
         const invalidLastNameErrorMessage = 'Invalid last name';
@@ -149,7 +161,7 @@ describe('SignUp Page -> Fields validation', () => {
         });
     });
      
-    it('ID-06.1: Should validate email field with multiple invalid formats email', () => {
+    it('ID-23.1: Should validate email field with multiple invalid formats email', () => {
         // Arrange
         // Adding an SQL Injection Test - TODO: create a spec file with injection tests.
         const invalidEmails: string[] = ['test@', 'test.com', 'test@com', '@test.com', 'test@.com', 'test@@test.com', ' OR \'1\'=\'1\'; --@test.com']; 
@@ -177,7 +189,7 @@ describe('SignUp Page -> Fields validation', () => {
         });
     });
 
-    it('ID-06.2: Should validate email field with valid email', () => {
+    it('ID-23.2: Should validate email field with valid email', () => {
         // Arrange
         const validEmail: string = 'jon.snow@test.com';
         const requiredEmailMessage: string = text['labels']['required'];
@@ -195,7 +207,7 @@ describe('SignUp Page -> Fields validation', () => {
         cy.getDataTestId(SignupPageElements.FormErrorEmail, 'not.exist');
     });
 
-    it('ID-06.3: Should validate that 128 character emails are accepted and 129 character emails show a too long error', () => {
+    it('ID-23.3: Should validate that 128 character emails are accepted and 129 character emails show a too long error', () => {
         // Arrange
         const validEmail: string = `jon.snow+test${'a'.repeat(106)}@test.com`;  // 128 characters
         const invalidEmail: string = `jon.snow+test${'a'.repeat(107)}@test.com`;  // 129 characters
@@ -220,8 +232,13 @@ describe('SignUp Page -> Fields validation', () => {
             .and('have.text', tooLongErrorMessage);
     });
 
-    // Failing
-    it('ID-07.1: Should validate mobile field with multiple invalid mobile phone formats', () => {
+    /**
+     * Failing: to validate with PO.
+     * Expectations: The phone field UI should ensure the phone number is complete and valid.
+     * Current behaviors: A partial phone number is accepted by UI.
+     * Priority: high
+     * */ 
+    it('ID-24.1: Should validate mobile field with multiple invalid mobile phone formats', () => {
         const invalidPhones: string[] = ['5', '555-555-555', 'ABC-DEF-GHIJ', '555-555-555A'];
         const invalidPhoneMessage: string = text['labels']['invalidPhone'];
     
@@ -237,7 +254,7 @@ describe('SignUp Page -> Fields validation', () => {
         });
     });
 
-    it('ID-07.2: Should validate mobile field with valid mobile number', () => {
+    it('ID-24.2: Should validate mobile field with valid mobile number', () => {
         // Arrange
         const validPhone: string = '514-1234567';
         const inputLabelPhone: string = text['fields']['phone'];
@@ -259,7 +276,7 @@ describe('SignUp Page -> Fields validation', () => {
         cy.getDataTestId(SignupPageElements.FormErrorPhone, 'not.exist');
     });
 
-    it('ID-08.1: Should validate password field with invalid passwords', () => {
+    it('ID-25.1: Should validate password field with invalid passwords', () => {
         // Arrange
         const invalidPasswordMessage: string = text['labels']['invalidPassword'];
         const invalidPasswords: string[] = [
@@ -283,7 +300,7 @@ describe('SignUp Page -> Fields validation', () => {
         });
     });
 
-    it('ID-08.2: Should validate password field with valid passwords', () => {
+    it('ID-25.2: Should validate password field with valid passwords', () => {
         // Arrange
         const inputPassword: string = text['fields']['password'];
         const requiredPasswordMessage: string = text['labels']['required'];
@@ -315,7 +332,7 @@ describe('SignUp Page -> Fields validation', () => {
         });
     });
 
-    it('ID-09: Should validate password confirmation field with same value as password field', () => {
+    it('ID-26: Should validate password confirmation field with same value as password field', () => {
         type TestData = {
             password: string,
             passwordConfirmation: string
@@ -375,7 +392,7 @@ describe('SignUp Page -> Fields validation', () => {
         cy.getDataTestId(SignupPageElements.ValidationErrorsPasswordsMustMatch, 'not.exist');
     });
 
-    it('ID-10: Should validate the province field with same ', () => {
+    it('ID-27: Should validate the province field with same ', () => {
         type TestData = {
             province: string,
             expected: string
@@ -404,7 +421,7 @@ describe('SignUp Page -> Fields validation', () => {
         });
     });
 
-    it('ID-11: Should check and uncheck the leadDistributeConsentAgreement checkbox', () => {        
+    it('ID-28: Should check and uncheck the leadDistributeConsentAgreement checkbox', () => {        
         // Arrange
         const agreementMessage: string = text['labels']['agreement'];
         const policyMessage: string = text['labels']['policy'];
