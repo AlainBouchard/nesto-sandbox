@@ -1,6 +1,5 @@
 {
     "compilerOptions": {
-      /* Projects */
       "target": "es5",
       "lib": ["dom", "es5"],
       "module": "commonjs",
@@ -11,8 +10,8 @@
       "strict": true
     },
     "include": [
-      "cypress/**/*.ts",      // Include Cypress test files
-      "cypress.config.ts"     // Include Cypress configuration
+      "cypress/**/*.ts", 
+      "cypress.config.ts"
     ],
     "exclude": [
       "node_modules"
