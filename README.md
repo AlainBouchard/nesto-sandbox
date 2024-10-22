@@ -69,7 +69,7 @@ Instructions:
 
     Or with the French UI language:
     ```sh
-    % npm run cypress:run:en
+    % npm run cypress:run:fr
     ```
 
 4. Wait for the test to run and complete.
