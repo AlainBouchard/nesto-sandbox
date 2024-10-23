@@ -131,7 +131,7 @@ Google Doc)
 
 ## Issues Report
 
-The following are issues from this test suite. Some may be expected by PO (or PM).  It should be discussed within the team so that either the feature of the test can be fixed and the issue closed. Every organization will have their own best practices and guidelines.
+The following are issues from this test suite. Some may be expected by PO (or PM).  It should be discussed within the team so that either the feature or the test can be fixed and the issue closed. Every organization will have their own best practices and guidelines.
 
 | Issue ID | Test Case ID | Summary | Steps to Reproduce | Expected Behavior | Actual Behavior | Priority |
 |----------|--------------|---------|--------------------|-------------------|-----------------|----------|
